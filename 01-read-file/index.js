@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 const pathWay=path.join(__dirname,'text.txt');
-console.log(pathWay);
 const stream = new fs.ReadStream(pathWay,{encoding:'utf-8'});
  
 stream.on('readable', function(){

@@ -7,14 +7,12 @@ fs.readdir(pathForRead,{withFileTypes: true}, (err, files) => {
     console.log(err);
   else {    
     let pathForBundle=path.join(__dirname,'project-dist','bundle.css'); 
-    fs.writeFile(pathForBundle,'utf8',(err)=>{
-      if (err) throw err;
-      console.log('Bundle create');
+    fs.writeFile(pathForBundle,'',(err)=>{
+      if (err) throw err;      
     });
 
     files.forEach(file => {
-      let fileExt=path.extname(file.name);
-      console.log(fileExt);
+      let fileExt=path.extname(file.name);      
       if (!file.isDirectory()&&(fileExt==='.css')){        
         let pathForStyles=path.join(__dirname,'styles',file.name);        
         const streamRead = new fs.ReadStream(pathForStyles,{encoding:'utf-8'});   
@@ -23,8 +21,7 @@ fs.readdir(pathForRead,{withFileTypes: true}, (err, files) => {
           const data = streamRead.read();
           if(data != null){            
             fs.appendFile(pathForBundle,`${data}\n`,(err)=>{
-              if(err) throw err;
-              console.log('Data has been added!');
+              if(err) throw err;              
             });
           }  
         });
